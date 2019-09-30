@@ -11,5 +11,4 @@ ENV PYTHONPATH=/opt/octopus
 
 RUN pip install -r requirements.txt
 
-CMD alembic upgrade head
 CMD python octopus/__init__.py
