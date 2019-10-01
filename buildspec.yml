@@ -21,8 +21,10 @@ phases:
       - echo Building the Docker image...
       - docker build -t python-dev .
       - docker tag python-dev:latest 362546943964.dkr.ecr.eu-central-1.amazonaws.com/python-dev:latest
+      - docker tag python-dev:latest 362546943964.dkr.ecr.eu-central-1.amazonaws.com/python-dev:CODEBUILD_START_TIME
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push 362546943964.dkr.ecr.eu-central-1.amazonaws.com/python-dev:latest
+      - docker push 362546943964.dkr.ecr.eu-central-1.amazonaws.com/python-dev:CODEBUILD_START_TIME
