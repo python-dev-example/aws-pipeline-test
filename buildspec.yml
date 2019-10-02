@@ -15,7 +15,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t python-dev .
+      - docker build -t python-dev-repository .
       - docker tag python-dev-repository:latest 362546943964.dkr.ecr.eu-central-1.amazonaws.com/python-dev-repository:latest
       - docker tag python-dev-repository:$CODEBUILD_START_TIME 362546943964.dkr.ecr.eu-central-1.amazonaws.com/python-dev-repository:$CODEBUILD_START_TIME
   post_build:
