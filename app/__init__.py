@@ -63,7 +63,7 @@ class HealthCheckRequestHandler(JsonRequestHandler):
 
 
 routes = [
-    (r'/api/v1/scheduler/create', HealthCheckRequestHandler),
+    (r'/api/v1/connection/check', HealthCheckRequestHandler),
 ]
 
 
