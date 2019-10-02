@@ -2,13 +2,13 @@ FROM python:3.7
 
 MAINTAINER Vladyslav Maksymov (vmaksimov@ecisys.com)
 
-COPY . /opt/octopus
+COPY . /opt/app
 
 EXPOSE 5000
 
-WORKDIR /opt/octopus
-ENV PYTHONPATH=/opt/octopus
+WORKDIR /opt/app
+ENV PYTHONPATH=/opt/app
 
 RUN pip install -r requirements.txt
 
-CMD python octopus/__init__.py
+CMD python app/__init__.py
