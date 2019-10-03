@@ -1,12 +1,16 @@
 import json
+import logging
+from datetime import datetime
 from typing import Optional, Awaitable
 
-from datetime import datetime
 from tornado.ioloop import IOLoop
 from tornado.web import Application, RequestHandler
 from tornado_sqlalchemy import SessionMixin
 
 from app.constants import HttpHeaders, ContentType
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 
 def create_json_error(reason, status_code, exception):
@@ -59,6 +63,7 @@ class JsonRequestHandler(SessionMixin, RequestHandler):
 
 class HealthCheckRequestHandler(JsonRequestHandler):
     async def get(self):
+        logger.info("health check")
         self.write_as_json({})
 
 
