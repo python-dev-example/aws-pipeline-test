@@ -15,6 +15,8 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
+      - echo Project name [$PROJECT_NAME]
+      - echo AWS Account ID [$AWS_ACCOUNT_ID]
       - docker build -t $PROJECT_NAME .
       - docker tag $PROJECT_NAME:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$PROJECT_NAME:latest
       - docker tag $PROJECT_NAME:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$PROJECT_NAME:$CODEBUILD_START_TIME
