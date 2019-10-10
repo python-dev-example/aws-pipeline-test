@@ -8,19 +8,19 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version
-      - $(aws ecr get-login --no-include-email --region eu-central-1)
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
       - echo Docker version...
       - docker version
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t python-dev-repository .
-      - docker tag python-dev-repository:latest 362546943964.dkr.ecr.eu-central-1.amazonaws.com/python-dev-repository:latest
-      - docker tag python-dev-repository:latest 362546943964.dkr.ecr.eu-central-1.amazonaws.com/python-dev-repository:$CODEBUILD_START_TIME
+      - docker build -t $PROJECT_NAME .
+      - docker tag $PROJECT_NAME:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$PROJECT_NAME:latest
+      - docker tag $PROJECT_NAME:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$PROJECT_NAME:$CODEBUILD_START_TIME
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push 362546943964.dkr.ecr.eu-central-1.amazonaws.com/python-dev-repository:latest
-      - docker push 362546943964.dkr.ecr.eu-central-1.amazonaws.com/python-dev-repository:$CODEBUILD_START_TIME
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$PROJECT_NAME:latest
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$PROJECT_NAME:$CODEBUILD_START_TIME
