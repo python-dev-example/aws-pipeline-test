@@ -2,13 +2,13 @@
   "executionRoleArn": "arn:aws:iam::362546943964:role/ecsTaskExecutionRole",
   "containerDefinitions": [
     {
-      "name": "sample-website",
+      "name": "python-dev",
       "image": "<IMAGE1_NAME>",
       "essential": true,
       "portMappings": [
         {
           "containerPort": 5000,
-          "hostPort": 0,
+          "hostPort": 5000,
           "protocol": "tcp"
         }
       ]
@@ -18,6 +18,7 @@
     "FARGATE"
   ],
   "networkMode": "awsvpc",
-  "cpu": "0",
-  "memory": "300"
+  "cpu": "256",
+  "memory": "512",
+  "family": "python-dev"
 }
