@@ -1,22 +1,23 @@
 {
-  "name": "${var.project_name}",
-  "image": "${aws_ecr_repository.ecr_repository.repository_url}:${var.ecr_build_number}",
-  "cpu": 0,
-  "memory": 300,
-  "essential": true,
-  "portMappings": [
+  "executionRoleArn": "arn:aws:iam::362546943964:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
     {
-      "containerPort": 5000,
-      "hostPort": 0,
-      "protocol": "tcp"
+      "name": "sample-website",
+      "image": "<IMAGE1_NAME>",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 5000,
+          "hostPort": 0,
+          "protocol": "tcp"
+        }
+      ]
     }
   ],
-  "logConfiguration": {
-    "logDriver": "awslogs",
-    "options": {
-      "awslogs-group": "${aws_cloudwatch_log_group.project_cloudwatch.name}",
-      "awslogs-region": "${var.aws_default_region}",
-      "awslogs-stream-prefix": "${var.project_name}"
-    }
-  }
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "networkMode": "awsvpc",
+  "cpu": "0",
+  "memory": "300"
 }
